@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Like } from 'typeorm';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
-import { Recipe } from './entities/recipes.entity/recipes.entity';
+import { Recipe } from './recipes.entity';
 
 @Injectable()
 export class RecipesService {
