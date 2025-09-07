@@ -5,7 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { ReceitasModule } from './receitas/receitas.module';
+import { Recipes } from './recipes/recipes.module';
 
 @Module({
   imports: [
@@ -18,13 +18,13 @@ import { ReceitasModule } from './receitas/receitas.module';
       port: 3306,
       username: 'root',
       password: 'rootpassword',
-      database: 'receitas_db',
+      database: 'recipes_db',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
     AuthModule,
     UsersModule,
-    ReceitasModule,
+    RecipesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

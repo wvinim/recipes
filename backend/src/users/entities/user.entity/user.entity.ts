@@ -1,4 +1,4 @@
-import { Recipe } from 'src/receitas/entities/receitas.entity/receitas.entity';
+import { Recipe } from 'src/recipes/entities/recipes.entity/recipes.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 

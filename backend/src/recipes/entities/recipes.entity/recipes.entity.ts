@@ -1,7 +1,5 @@
-// src/recipes/recipe.entity.ts
-import { User } from 'src/users/entities/user.entity/user.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-
+import { User } from 'src/users/entities/user.entity/user.entity';
 
 @Entity()
 export class Recipe {

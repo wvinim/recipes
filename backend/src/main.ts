@@ -12,7 +12,7 @@ async function bootstrap() {
     .setTitle('API de Receitas')
     .setDescription('Documentação da API de Receitas')
     .setVersion('1.0')
-    .addTag('receitas')
+    .addTag('recipes')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

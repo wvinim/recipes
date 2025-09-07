@@ -5,7 +5,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: receitas_db
+      MYSQL_DATABASE: recipes_db
     ports:
       - "3306:3306"
     volumes:
