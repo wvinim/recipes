@@ -13,6 +13,14 @@ async function bootstrap() {
     .setDescription('Documentação da API de Receitas')
     .setVersion('1.0')
     .addTag('recipes')
+    .addBearerAuth({
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        in: 'Header',
+        name: 'Authorization',
+        description: 'Entre com o token JWT',
+    }, 'access-token')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
