@@ -19,15 +19,9 @@ async function bootstrap() {
     .setTitle('API de Receitas')
     .setDescription('Documentação da API de Receitas')
     .setVersion('1.0')
-    .addTag('recipes')
-    .addBearerAuth({
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-        in: 'Header',
-        name: 'Authorization',
-        description: 'Entre com o token JWT',
-    }, 'access-token')
+    .addTag('users', 'Para iniciar, registre um usuário')
+    .addTag('auth', 'Faça login com qualquer usuário para gerar um cookie com o token')
+    .addTag('recipes', 'Todas as rotas das receitas precisam do cookie com o token')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
