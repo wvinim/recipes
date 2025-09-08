@@ -1,11 +1,13 @@
+// src/components/Auth/Register.test.js
 import { describe, it, expect, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import Register from './Register.vue';
+import axios from 'axios';
 
-const mockSubmit = vi.fn();
+vi.mock('axios');
 
 describe('Register Component', () => {
-  it('should render a complete registration form', () => {
+  it('deve renderizar um formulário de cadastro completo', () => {
     const wrapper = mount(Register);
     
     expect(wrapper.find('input[type="email"]').exists()).toBe(true);
@@ -13,16 +15,21 @@ describe('Register Component', () => {
     expect(wrapper.find('button[type="submit"]').exists()).toBe(true);
   });
   
-  it('should call the submit method when the form is submitted', async () => {
+  it('deve fazer a requisição de cadastro com sucesso e exibir uma mensagem de sucesso', async () => {
     const wrapper = mount(Register);
-
+    
+    axios.post.mockResolvedValue({ status: 201, data: 'User created' });
+    
     await wrapper.find('input[type="email"]').setValue('user@example.com');
     await wrapper.find('input[type="password"]').setValue('senha123');
-    
-    wrapper.vm.submitForm = mockSubmit;
-    
+
     await wrapper.find('form').trigger('submit');
     
-    expect(mockSubmit).toHaveBeenCalled();
+    expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/users/register', {
+      email: 'user@example.com',
+      password: 'senha123',
+    });
+    
+    await wrapper.vm.$nextTick();
   });
 });
