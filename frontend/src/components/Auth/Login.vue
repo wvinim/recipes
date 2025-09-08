@@ -19,6 +19,9 @@
 <script setup>
 import { ref } from 'vue';
 import api from '../../axios-config';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const email = ref('');
 const password = ref('');
@@ -35,7 +38,7 @@ const submitForm = async () => {
       password: password.value,
     });
     router.push('/recipes');
-  } catch (err) {
+  } catch (err) { 
     if (err.response && err.response.data.message) {
       error.value = err.response.data.message;
     } else {
