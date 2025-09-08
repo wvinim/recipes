@@ -68,7 +68,7 @@ const submitForm = async () => {
   };
 
   try {
-    await api.put(`/recipes/${route.params.id}`, recipeData);
+    await api.patch(`/recipes/${route.params.id}`, recipeData);
     router.push(`/recipes/${route.params.id}`);
   } catch (err) {
     if (err.response && err.response.data.message) {
