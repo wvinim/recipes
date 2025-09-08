@@ -25,6 +25,11 @@
           Editar
         </router-link>
       </p>
+      <p>
+        <button @click="confirmDelete(recipe.id)" class="delete-button">
+          Excluir
+        </button>
+      </p>
     </div>
   </div>
 </template>
@@ -39,6 +44,22 @@ const router = useRouter();
 const recipes = ref([]);
 const loading = ref(true);
 const error = ref(null);
+
+const confirmDelete = (id) => {
+  if (window.confirm('Tem certeza de que deseja excluir esta receita?')) {
+    deleteRecipe(id);
+  }
+};
+
+const deleteRecipe = async (id) => {
+  try {
+    await api.delete(`/recipes/${id}`);
+    recipes.value = recipes.value.filter(recipe => recipe.id !== id);
+  } catch (err) {
+    error.value = 'Ocorreu um erro ao excluir a receita.';
+    console.error(err);
+  }
+};
 
 onMounted(async () => {
   try {
