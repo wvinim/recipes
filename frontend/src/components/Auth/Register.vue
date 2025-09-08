@@ -18,7 +18,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import axios from 'axios';
+import api from '../../axios-config';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const email = ref('');
 const password = ref('');
@@ -30,12 +33,11 @@ const submitForm = async () => {
   error.value = null;
 
   try {
-    const response = await axios.post('http://localhost:3000/users/register', {
+    const response = await api.post('http://localhost:3000/users/register', {
       email: email.value,
       password: password.value,
     });
-    console.log('Usuário cadastrado com sucesso!', response.data);
-    // Redirecionar para a página de login
+    router.push('/login');
   } catch (err) {
     if (err.response && err.response.data.message) {
       error.value = err.response.data.message;
