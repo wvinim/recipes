@@ -1,5 +1,5 @@
 import axios from 'axios';
-import router from './router';
+import { handleLogout } from './components/Auth/auth.service';
 
 const api = axios.create({
   baseURL: 'http://localhost:3000',
@@ -12,7 +12,7 @@ api.interceptors.response.use(
   },
   (error) => {
     if (error.response && error.response.status === 401) {
-      router.push('/login');
+      handleLogout()
     }
     return Promise.reject(error);
   }
