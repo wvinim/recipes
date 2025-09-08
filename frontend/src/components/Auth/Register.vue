@@ -14,6 +14,10 @@
       {{ loading ? 'Cadastrando...' : 'Cadastrar' }}
     </button>
   </form>
+  <div class="redirect-link">
+    <p>Já tem uma conta?</p>
+    <router-link to="/login">Faça login aqui</router-link>
+  </div>
 </template>
 
 <script setup>
