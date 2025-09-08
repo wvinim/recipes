@@ -32,9 +32,8 @@ describe('ViewRecipe Component', () => {
     const wrapper = mount(ViewRecipe);
 
     await vi.waitFor(() => {
-      // Movendo todas as verificações do DOM para dentro deste bloco
       expect(api.get).toHaveBeenCalledWith('/recipes/1');
-      expect(wrapper.find('h2').text()).toContain(mockRecipe.title);
+      expect(wrapper.find('h3').text()).toContain(mockRecipe.title);
       expect(wrapper.find('p.description').text()).toContain(mockRecipe.description);
       expect(wrapper.find('p.ingredients').text()).toContain('Morango, Banana, Maçã');
       expect(wrapper.find('p.instructions').text()).toContain(mockRecipe.instructions);

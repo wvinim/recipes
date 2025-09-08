@@ -8,7 +8,7 @@
     <div v-if="error" class="error">{{ error }}</div>
     
     <div v-if="recipe">
-      <h2>{{ recipe.title }}</h2>
+      <h3>{{ recipe.title }}</h3>
       <h3>Descrição:</h3>
       <p class="description">{{ recipe.description }}</p>
       <h3>Ingredientes:</h3>
