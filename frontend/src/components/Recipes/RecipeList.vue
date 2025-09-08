@@ -16,6 +16,9 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import api from '../../axios-config';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const recipes = ref([]);
 const loading = ref(true);
@@ -26,6 +29,10 @@ onMounted(async () => {
     const response = await api.get('/recipes');
     recipes.value = response.data;
   } catch (err) {
+    if(err.status === 401) {
+      router.push('/login');
+    }
+
     if (err.response && err.response.data.message) {
       error.value = err.response.data.message;
     } else {
