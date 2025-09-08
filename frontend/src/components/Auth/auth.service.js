@@ -11,3 +11,7 @@ export const handleLogout = async () => {
     console.error('Erro ao fazer logout:', err);
   }
 };
+
+export const handleLoggedIn = async () => {
+  setIsAuthenticated(true);
+};

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { handleLogout } from './components/Auth/auth.service';
+import { handleLogout, handleLoggedIn } from './components/Auth/auth.service';
 
 const api = axios.create({
   baseURL: 'http://localhost:3000',
@@ -8,6 +8,7 @@ const api = axios.create({
 
 api.interceptors.response.use(
   (response) => {
+    handleLoggedIn()
     return response;
   },
   (error) => {
