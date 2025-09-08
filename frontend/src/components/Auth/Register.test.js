@@ -1,10 +1,9 @@
-// src/components/Auth/Register.test.js
 import { describe, it, expect, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import Register from './Register.vue';
-import axios from 'axios';
+import api from '../../axios-config';
 
-vi.mock('axios');
+vi.mock('../../axios-config');
 
 describe('Register Component', () => {
   it('deve renderizar um formulário de cadastro completo', () => {
@@ -18,14 +17,14 @@ describe('Register Component', () => {
   it('deve fazer a requisição de cadastro com sucesso e exibir uma mensagem de sucesso', async () => {
     const wrapper = mount(Register);
     
-    axios.post.mockResolvedValue({ status: 201, data: 'User created' });
+    api.post.mockResolvedValue({ status: 201, data: 'User created' });
     
     await wrapper.find('input[type="email"]').setValue('user@example.com');
     await wrapper.find('input[type="password"]').setValue('senha123');
 
     await wrapper.find('form').trigger('submit');
     
-    expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/users/register', {
+    expect(api.post).toHaveBeenCalledWith('http://localhost:3000/users/register', {
       email: 'user@example.com',
       password: 'senha123',
     });
