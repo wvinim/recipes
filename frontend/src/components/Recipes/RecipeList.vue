@@ -7,6 +7,8 @@
     <div v-for="recipe in recipes" :key="recipe.id" class="recipe-card">
       <h3>{{ recipe.title }}</h3>
       <p>{{ recipe.description }}</p>
+      <p>{{ recipe.ingredients }}</p>
+      <p>{{ recipe.instructions }}</p>
     </div>
   </div>
 </template>
