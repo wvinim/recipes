@@ -1,6 +1,12 @@
 <template>
   <div class="recipe-list">
-    <h2>Lista de Receitas</h2>
+    <h2>Minhas Receitas</h2>
+
+    <div class="add-recipe-button-container">
+      <router-link to="/recipes/create" class="add-recipe-button">
+        + Adicionar Nova Receita
+      </router-link>
+    </div>
     <div v-if="loading">Carregando receitas...</div>
     <div v-if="error" class="error">{{ error }}</div>
     
@@ -9,6 +15,16 @@
       <p>{{ recipe.description }}</p>
       <p>{{ recipe.ingredients }}</p>
       <p>{{ recipe.instructions }}</p>
+      <p>
+        <router-link :to="`/recipes/${recipe.id}`">
+        Visualizar
+        </router-link>
+      </p>
+      <p>
+        <router-link :to="`/recipes/${recipe.id}/edit`" class="edit-link">
+          Editar
+        </router-link>
+      </p>
     </div>
   </div>
 </template>
