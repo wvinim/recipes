@@ -9,6 +9,11 @@ async function bootstrap() {
 
   app.use(cookieParser());
   app.useGlobalPipes(new ValidationPipe());
+
+  app.enableCors({
+    origin: 'http://localhost:5173', // Altere para a URL do seu frontend em produção
+    credentials: true,
+  });
   
   const config = new DocumentBuilder()
     .setTitle('API de Receitas')
