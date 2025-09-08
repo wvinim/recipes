@@ -13,8 +13,7 @@ export class RecipesController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth('access-token')
-  @ApiOperation({ summary: 'Cadastrar uma nova receita (requer autenticação)' })
+  @ApiOperation({ summary: 'Cadastrar uma nova receita' })
   @ApiResponse({ status: 201, description: 'Receita criada com sucesso.' })
   async create(@Req() req: Request, @Body() createRecipeDto: CreateRecipeDto) {
     const userId = req.user!.userId;
@@ -22,18 +21,14 @@ export class RecipesController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Listar todas as receitas (opcionalmente com busca)' })
-  @ApiQuery({
-    name: 'search',
-    required: false,
-    type: String,
-    description: 'Termo de busca para o título da receita.',
-  })
-  findAll(@Query('search') search?: string) {
-    return this.recipesService.findAll(search);
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Lista as receitas do usuário' })
+  findAll(@Req() req) {
+    return this.recipesService.findAll(req.user.userId);
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Buscar uma receita pelo ID' })
   findOne(@Param('id') id: string) {
     return this.recipesService.findOne(+id);
@@ -41,16 +36,14 @@ export class RecipesController {
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth('access-token')
-  @ApiOperation({ summary: 'Atualizar uma receita pelo ID (requer autenticação)' })
+  @ApiOperation({ summary: 'Atualizar uma receita pelo ID' })
   update(@Param('id') id: string, @Body() updateRecipeDto: UpdateRecipeDto) {
     return this.recipesService.update(+id, updateRecipeDto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth('access-token')
-  @ApiOperation({ summary: 'Excluir uma receita pelo ID (requer autenticação)' })
+  @ApiOperation({ summary: 'Excluir uma receita pelo ID' })
   remove(@Param('id') id: string) {
     return this.recipesService.remove(+id);
   }

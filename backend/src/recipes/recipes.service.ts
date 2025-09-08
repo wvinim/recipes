@@ -18,11 +18,10 @@ export class RecipesService {
     return this.recipesRepository.save(newRecipe);
   }
 
-  async findAll(query?: string): Promise<Recipe[]> {
-    if (query) {
-      return this.recipesRepository.find({ where: { title: Like(`%${query}%`) } });
-    }
-    return this.recipesRepository.find();
+  async findAll(userId: number): Promise<Recipe[]> {
+    return this.recipesRepository.find({
+      where: { user: { id: userId } },
+    });
   }
 
   async findOne(id: number): Promise<Recipe> {
