@@ -20,7 +20,6 @@ export class AuthController {
     }
     const token = await this.authService.login(user);
 
-    // Define o cookie HttpOnly
     response.cookie('access_token', token.access_token, { 
       httpOnly: true,
       secure: false, // Use 'true' em produção (HTTPS)
@@ -28,5 +27,13 @@ export class AuthController {
     });
 
     return { message: 'Login bem-sucedido' };
+  }
+
+  @Post('logout')
+  async logout(@Res({ passthrough: true }) response: Response) {
+    response.clearCookie('access_token');
+    return {
+      message: 'Logout successful',
+    };
   }
 }
