@@ -67,7 +67,7 @@ describe('EditRecipe Component', () => {
     
     await wrapper.find('form').trigger('submit');
 
-    expect(api.put).toHaveBeenCalledWith('/recipes/1', {
+    expect(api.patch).toHaveBeenCalledWith('/recipes/1', {
       title: updatedTitle,
       description: mockRecipe.description,
       ingredients: mockRecipe.ingredients,
