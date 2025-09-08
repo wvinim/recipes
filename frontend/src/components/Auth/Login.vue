@@ -14,6 +14,10 @@
       {{ loading ? 'Entrando...' : 'Entrar' }}
     </button>
   </form>
+  <div class="redirect-link">
+      <p>Ainda não tem uma conta?</p>
+      <router-link to="/register">Cadastre-se aqui</router-link>
+    </div>
 </template>
 
 <script setup>
@@ -53,5 +57,8 @@ const submitForm = async () => {
 <style scoped>
 .error {
   color: red;
+}
+.redirect-link {
+  margin-top: 1rem;
 }
 </style>
