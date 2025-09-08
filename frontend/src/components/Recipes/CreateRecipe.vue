@@ -1,4 +1,7 @@
 <template>
+  <router-link :to="`/recipes`" class="edit-link">
+      Voltar para receitas
+  </router-link>
   <form @submit.prevent="submitForm">
     <h2>Nova Receita</h2>
     <div v-if="error" class="error">{{ error }}</div>
@@ -51,7 +54,6 @@ const submitForm = async () => {
 
   try {
     await api.post('/recipes', recipeData);
-    console.log('Receita cadastrada com sucesso!');
     router.push('/recipes');
   } catch (err) {
     if (err.response && err.response.data.message) {

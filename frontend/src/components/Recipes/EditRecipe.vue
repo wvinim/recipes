@@ -1,4 +1,7 @@
 <template>
+  <router-link :to="`/recipes`" class="edit-link">
+      Voltar para receitas
+  </router-link>
   <form @submit.prevent="submitForm">
     <h2>Editar Receita</h2>
     <div v-if="error" class="error">{{ error }}</div>

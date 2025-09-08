@@ -1,5 +1,9 @@
 <template>
   <div class="view-recipe">
+    <router-link :to="`/recipes`" class="edit-link">
+      Voltar para receitas
+    </router-link>
+    <h2>Visualizar Receita</h2>
     <div v-if="loading">Carregando receita...</div>
     <div v-if="error" class="error">{{ error }}</div>
     
