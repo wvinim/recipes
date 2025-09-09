@@ -1,12 +1,14 @@
 services:
   db:
     image: mysql:8.0
+    env_file:
+      - ../.env
     container_name: mysql_db
-    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: recipes_db
+      - MYSQL_TCP_PORT=${MYSQL_TCP_PORT}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
     ports:
-      - "3306:3306"
+      - "${MYSQL_TCP_PORT}:${MYSQL_TCP_PORT}"
     volumes:
       - ./mysql_data:/var/lib/mysql
