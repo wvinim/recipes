@@ -25,6 +25,7 @@ services:
       - BACKEND_PORT=${BACKEND_PORT}
       - FRONTEND_HOST=localhost
       - FRONTEND_PORT=${FRONTEND_PORT}
+      - JWT_SECRET=${JWT_SECRET}
       - ENVIRONMENT=docker
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
-export const JwtSecretKey = 'SUA_CHAVE_SECRETA_DE_CRIPTOGRAFIA';
+export const JwtSecretKey = process.env.JWT_SECRET;
 
 @Injectable()
 export class JwtCookieStrategy extends PassportStrategy(Strategy, 'jwt') {
