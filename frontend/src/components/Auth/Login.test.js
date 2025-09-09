@@ -1,15 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import Login from './Login.vue';
-import api from '../../axios-config'; 
-import { createRouter, createWebHistory } from 'vue-router';
-
-vi.mock('../../axios-config');
-
-const router = createRouter({
-  history: createWebHistory(),
-  routes: [{ path: '/', component: { template: '<div>home</div>' } }, { path: '/recipes', component: { template: '<div>recipes</div>' } }],
-});
+import api from '../../axios-config';
 
 describe('Login Component', () => {
   it('deve renderizar o formulário de login', () => {
@@ -21,33 +13,21 @@ describe('Login Component', () => {
   });
 
   it('deve fazer a requisição de login com sucesso', async () => {
-    const wrapper = mount(Login, {
-        global: {
-        plugins: [router],
-        },
-    });
-
-    api.post.mockResolvedValue({ data: { access_token: 'fake-jwt-token' } });
-    vi.spyOn(localStorage, 'setItem');
-    vi.spyOn(router, 'push');
+    const wrapper = mount(Login);
 
     await wrapper.find('input[type="email"]').setValue('user@example.com');
     await wrapper.find('input[type="password"]').setValue('senha123');
 
     await wrapper.find('form').trigger('submit');
 
-    expect(api.post).toHaveBeenCalledWith('http://localhost:3000/auth/login', {
+    expect(api.post).toHaveBeenCalledWith('/auth/login', {
         email: 'user@example.com',
         password: 'senha123',
     });
   });
 
   it('deve exibir uma mensagem de erro em caso de falha no login', async () => {
-    const wrapper = mount(Login, {
-      global: {
-        plugins: [router],
-      },
-    });
+    const wrapper = mount(Login);
 
     api.post.mockRejectedValue({
       response: {

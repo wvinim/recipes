@@ -1,9 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import Register from './Register.vue';
 import api from '../../axios-config';
-
-vi.mock('../../axios-config');
 
 describe('Register Component', () => {
   it('deve renderizar um formulário de cadastro completo', () => {
@@ -24,7 +22,7 @@ describe('Register Component', () => {
 
     await wrapper.find('form').trigger('submit');
     
-    expect(api.post).toHaveBeenCalledWith('http://localhost:3000/users/register', {
+    expect(api.post).toHaveBeenCalledWith('/users/register', {
       email: 'user@example.com',
       password: 'senha123',
     });

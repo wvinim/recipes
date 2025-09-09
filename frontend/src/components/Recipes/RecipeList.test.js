@@ -1,9 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi} from 'vitest';
 import { mount } from '@vue/test-utils';
 import RecipeList from './RecipeList.vue';
 import api from '../../axios-config';
-
-vi.mock('../../axios-config');
 
 describe('RecipeList Component', () => {
   it('deve buscar e exibir uma lista de receitas', async () => {

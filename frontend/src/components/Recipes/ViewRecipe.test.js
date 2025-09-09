@@ -3,20 +3,6 @@ import { mount } from '@vue/test-utils';
 import ViewRecipe from './ViewRecipe.vue';
 import api from '../../axios-config';
 
-vi.mock('../../axios-config');
-
-vi.mock('vue-router', async (importOriginal) => {
-  const actual = await importOriginal();
-  return {
-    ...actual,
-    useRoute: vi.fn(() => ({
-      params: {
-        id: '1',
-      },
-    })),
-  };
-});
-
 describe('ViewRecipe Component', () => {
   it('deve buscar e exibir os detalhes de uma receita', async () => {
     const mockRecipe = {

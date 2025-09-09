@@ -3,23 +3,6 @@ import { mount } from '@vue/test-utils';
 import EditRecipe from './EditRecipe.vue';
 import api from '../../axios-config';
 
-vi.mock('../../axios-config');
-
-vi.mock('vue-router', async (importOriginal) => {
-  const actual = await importOriginal();
-  return {
-    ...actual,
-    useRoute: vi.fn(() => ({
-      params: {
-        id: '1',
-      },
-    })),
-    useRouter: vi.fn(() => ({
-      push: vi.fn(),
-    })),
-  };
-});
-
 describe('EditRecipe Component', () => {
   it('deve buscar e preencher o formulário para uma receita existente', async () => {
     const mockRecipe = {

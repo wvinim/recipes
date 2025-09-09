@@ -1,9 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import DeleteRecipeButton from './DeleteRecipeButton.vue';
 import api from '../../axios-config';
-
-vi.mock('../../axios-config');
 
 describe('DeleteRecipeButton Component', () => {
   it('deve enviar uma requisição DELETE com o id correto ao ser clicado', async () => {

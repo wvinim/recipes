@@ -1,16 +1,7 @@
-// src/components/Recipes/CreateRecipe.test.js
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import CreateRecipe from './CreateRecipe.vue';
 import api from '../../axios-config';
-import { createRouter, createWebHistory } from 'vue-router';
-
-vi.mock('../../axios-config');
-
-const router = createRouter({
-  history: createWebHistory(),
-  routes: [{ path: '/', component: { template: '<div>home</div>' } }, { path: '/recipes', component: { template: '<div>recipes</div>' } }],
-});
 
 describe('CreateRecipe Component', () => {
   it('deve renderizar o formulário de cadastro de receita', () => {
@@ -24,11 +15,7 @@ describe('CreateRecipe Component', () => {
   });
 
   it('deve fazer a requisição para a API com os dados e o token', async () => {
-    const wrapper = mount(CreateRecipe, {
-      global: {
-        plugins: [router],
-      },
-    });
+    const wrapper = mount(CreateRecipe);
 
     const mockRecipeData = {
       title: 'Bolo de Chocolate',
