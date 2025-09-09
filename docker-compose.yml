@@ -1,0 +1,49 @@
+services:
+  mysql:
+    image: mysql:8.0
+    env_file:
+      - ./.env
+    environment:
+      - MYSQL_TCP_PORT=${MYSQL_TCP_PORT}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "${MYSQL_TCP_PORT}:${MYSQL_TCP_PORT}"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  backend:
+    build: ./backend
+    depends_on:
+      - mysql
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_TCP_PORT=${MYSQL_TCP_PORT}
+      - BACKEND_PORT=${BACKEND_PORT}
+      - FRONTEND_HOST=localhost
+      - FRONTEND_PORT=${FRONTEND_PORT}
+      - ENVIRONMENT=docker
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    environment:
+      - BACKEND_HOST=localhost
+      - BACKEND_PORT=${BACKEND_PORT}
+      - FRONTEND_PORT=${FRONTEND_PORT}
+    ports:
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+volumes:
+  mysql-data:
