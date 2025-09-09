@@ -1,14 +1,16 @@
 import axios from 'axios';
-import { handleLogout, handleLoggedIn } from './components/Auth/auth.service';
+import { handleLogout } from './components/Auth/auth.service';
+import { Env } from './config/env'
+
+const baseURL = `http://${Env.BACKEND_HOST}:${Env.BACKEND_PORT}`;
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: baseURL,
   withCredentials: true,
 });
 
 api.interceptors.response.use(
   (response) => {
-    handleLoggedIn()
     return response;
   },
   (error) => {
