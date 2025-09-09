@@ -37,7 +37,7 @@ const submitForm = async () => {
   error.value = null;
 
   try {
-    const response = await api.post('http://localhost:3000/users/register', {
+    const response = await api.post('/users/register', {
       email: email.value,
       password: password.value,
     });
