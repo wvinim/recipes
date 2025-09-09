@@ -2,7 +2,7 @@
   <div id="app">
     <header class="app-header">
       <nav class="app-nav">
-        <button v-if="isAuthenticated" @click="handleLogout" class="logout-button">Sair</button>
+        <button v-if="showButton" @click="handleLogout" class="logout-button">Sair</button>
       </nav>
     </header>
     <main class="app-main">
@@ -12,6 +12,13 @@
 </template>
 
 <script setup>
-import { isAuthenticated } from './components/auth/auth.state.js';
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { handleLogout } from './components/auth/auth.service.js';
+
+const route = useRoute()
+
+const hiddenRoutes = ['/login', '/register']
+
+const showButton = computed(() => !hiddenRoutes.includes(route.path))
 </script>

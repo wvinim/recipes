@@ -24,7 +24,6 @@
 import { ref } from 'vue';
 import api from '../../axios-config';
 import { useRouter } from 'vue-router';
-import { setIsAuthenticated } from './auth.state';
 
 const router = useRouter();
 
@@ -38,11 +37,10 @@ const submitForm = async () => {
   error.value = null;
 
   try {
-    const response = await api.post('http://localhost:3000/auth/login', {
+    const response = await api.post('/auth/login', {
       email: email.value,
       password: password.value,
     });
-    setIsAuthenticated(true);
     router.push('/recipes');
   } catch (err) { 
     if (err.response && err.response.data.message) {
